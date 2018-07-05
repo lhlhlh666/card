@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>两个功能运用同一个弹框</title>
+</head>
+<style>
+    html{
+        width: 100%;height: 100%;
+    }
+    .dialog {
+        width: 60%;height: 600px;
+        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+        margin:0 auto;display: none;
+        position: relative;
+        background-color: white;
+        z-index: 101;
+    }
+    .title {
+        height: 40px;
+        border-bottom: 1px solid gray;
+        padding-left: 10px;
+        margin-bottom: 10px;vertical-align: middle;
+    }
+    .title span {
+        line-height: 40px;
+    }
+    .footer {
+        width: 100%;height: 40px;
+        text-align: right;padding-top: 15px;padding-right: 10px;
+        vertical-align: middle;box-sizing: border-box;
+        border-top: 1px solid gray;
+        position: absolute;bottom: 10px;
+    }
+    .myDiv {
+        width: 100%;
+        height: 100%;
+        display: none;
+        margin:0px;z-index: 100;
+        position: absolute;top: 0px;
+        background-color: rgba(0,0,0,0.3);
+    }
+</style>
+<body>
+    <button type="button" onclick="editBox()">编辑</button>
+    <button type="button" onclick="newBox()">新增</button>
+    <div class="myDiv" id="myDiv" onclick="document.getElementById('dialog').style.display = 'none';document.getElementById('myDiv').style.display = 'none'"></div>
+    <div class="dialog" id="dialog">
+        <div class="content">
+            <div class="title">
+                <span id="title"></span>
+            </div>
+            <div class="form"></div>
+            <div class="footer">
+                <button onclick="save()">确定</button>
+                <button onclick="document.getElementById('dialog').style.display = 'none';document.getElementById('myDiv').style.display = 'none'">取消</button>
+            </div>
+            
+        </div>
+
+    </div>
+    <script type="text/javaScript">
+    var change = true;
+    var editval = document.getElementById('dialog');
+    var title = document.getElementById('title');
+    var myDiv = document.getElementById('myDiv');
+    function editBox() {
+       change = true;
+       title.innerText = '编辑';
+       editval.style.display = 'block';
+       myDiv.style.display = 'block';
+    }
+    function newBox() {
+       change = false;
+       title.innerText = '新增';
+       editval.style.display = 'block';
+       myDiv.style.display = 'block';
+    }
+   function save(){
+    // 提交时，根据change的值来判断是编辑还是新增，从而进行数据的传递
+    document.getElementById('dialog').style.display = 'none';
+    document.getElementById('myDiv').style.display = 'none'
+    if(change){
+        alert('编辑成功')
+    }else{
+        alert('添加成功')
+    }
+   }
+    </script>
+</body>
+</html>
